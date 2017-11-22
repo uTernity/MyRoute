@@ -1,0 +1,262 @@
+--keep=
+
+--keep-nodes=
+
+--keep-ways=
+highway=bridleway =bus_guideway =construction =corridor =cycleway =elevator =emergency_bay =escape =footway =living_street =motorway =motorway_link =path =pedestrian =platform
+=primary =primary_link =proposed =raceway =residential =road =secondary =secondary_link =service =steps =tertiary =tertiary_link =track =trunk =trunk_link =unclassified
+
+--drop-relations
+
+--keep-tags=all
+addr:city=
+addr:country=
+addr:housenumber=
+addr:postcode=
+addr:street=
+addr:suburb=
+alt_name=
+capacity=
+direction=
+ele=
+est_width=
+highway=
+hiking=yes
+incline=
+int_ref=
+is_in=
+is_in:city=
+is_in:country_code=
+junction=roundabout
+layer=
+lcn_ref
+level=
+lit=
+loc_name=
+local_ref=
+maxspeed=
+maxspeed:backward=
+maxspeed:conditional=
+maxspeed:forward=
+maxspeed:hgv=
+maxwidth=
+minspeed=
+name=
+name:*=
+nat_ref=
+network=
+noexit=yes
+old_name=
+old_ref=
+operator=
+piste:type=playground
+rcn_ref=
+ref=
+ref:IFOPT=
+ref_name=
+reg_name=
+source:maxspeed=
+source:maxspeed:backward=
+source:maxspeed:forward=
+start_date=
+traffic_sign=
+traffic_sign:backward=
+traffic_sign:forward=
+uic_name=
+uic_ref=
+width=
+access=agricultural =customers =delivery =designated =destination =forestry =no =official =permissive =private =yes
+bicycle=designated =destination =dismount =no =official =permissive =private =use_sidepath =yes
+bollard=removable =rising
+bus=designated =no =yes
+construction=bridleway =cycleway =footway =minor =motorway =motorway_link =path =pedestrian =primary =primary_link =rail =residential =secondary =secondary_link =service =steps =tertiary =tertiary_link =track =trunk =trunk_link =unclassified =yes
+covered=arcade =building_arcade =colonnade =yes
+crossing_ref=pegasus =pelican =puffin =tiger =toucan =zebra
+cycleway:left:bicycle=designated =destination =dismount =no =official =permissive =private =use_sidepath =yes
+cycleway:right:bicycle=designated =destination =dismount =no =official =permissive =private =use_sidepath =yes
+fee=no =yes
+ford=stepping_stones =yes
+hazard=ammunition =animal_crossing =chasm =curve =dangerous_animals =dangerous_road =farmyard =playing_children =minefield =radiation =rock_slide =school_crossing =school_zone =side_winds
+indoor=area =corridor =level =room =wall =yes
+kerb=flush =lowered =raised =rolled =yes
+lit_by_gaslight=no =yes
+mofa=designated =no =use_sidepath =yes
+parking=carports =garage_boxes =lane =multi-storey =rooftop =sheds =surface =underground
+proposed=bridleway =cycleway =footway =motorway =motorway_link =path =pedestrian =primary =primary_link =rail =residential =secondary =secondary_link =service =steps =tertiary =tertiary_link =track =trunk =trunk_link =unclassified
+shelter=no =yes
+snowmobile=designated =no =permissive =yes
+supervised=no =yes
+tactile_paving=yes =no =contrasted =primitive =incorrect
+traffic_calming=bump =chicane =choker =cushion =dip =hump =island =rumble_strip =table =yes
+traffic_signals:sound=locate =no =walk =yes
+traffic_signals:vibration=no =yes
+tram=no =yes
+wheelchair=designated =limited =no =yes
+
+--keep-way-tags=all
+access:conditional=
+access:lanes=
+area=no =yes
+bdouble=yes
+bicycle_road=yes
+bicycle:lanes=
+change:lanes=
+change:lanes:backward=
+change:lanes:forward=
+de:strassenschluessel=
+destination=
+destination:forward=
+destination:backward=
+destination:lanes=
+destination:lanes:backward=
+destination:lanes:forward=
+destination:ref=
+destination:ref:backward=
+destination:ref:forward=
+destination:ref:lanes=
+destination:symbol=
+destination:symbol:lanes=
+lanes=
+lanes:backward=
+lanes:forward=
+lcn=yes
+maxheight=
+maxweight=
+maxweight:conditional=
+motor_vehicle:conditional=
+mtb:scale=
+overtaking:hgv:conditional=
+placement=
+placement:backward=
+placement:right=
+postal_code=
+ramp:bicycle=yes
+ramp:stroller=yes
+ramp:wheelchair=yes
+rcn=yes
+shoulder:right=yes
+step_count=
+toll:hgv=yes
+toll:N3=yes
+turn=
+turn:lanes=
+turn:lanes:forward=
+turn:lanes:backward=
+zone:maxspeed=
+zone:traffic=
+agricultural=designated =destination =no =yes
+barrier=bollard =bump_gate =cable_barrier =city_wall =cycle_barrier =ditch =fence =full-height_turnstile =gate =guard_rail =handrail 
+=hedge =hegde_bank =jersey_barrier =kent_carriage_gap =kerb =retaining_wall =rope =tank_trap =toll_booth =turnstile =wall =yes
+bridge=aqueduct =boardwalk =cantilever =covered =low_water_crossing =movable =trestle =viaduct =yes
+carriage=designated =forestry =no
+class:bicycle=-3 =-2 =-1 =0 =1 =2 =3
+class:bicycle_mtb=-3 =-2 =-1 =0 =1 =2 =3
+conveying=forward =backward =reversible =yes
+crossing=island =no =traffic_signals =uncontrolled =unmarked =zebra
+cutting=left =right =yes
+cycleway=lane =crossing =no =opposite =opposite_lane =opposite_track =seperate =share_busway =shoulder =sidepath =track
+cycleway:left=lane =crossing =no =opposite =opposite_lane =opposite_track =seperate =share_busway =shoulder =sidepath =track
+cycleway:left:oneway=1 =-1 =alternating =no =reversible =yes
+cycleway:left:segregated=no =yes
+cycleway:left:smoothness=bad =excellent =good =horrible =impassable =intermediate =very_bad =very_horrible
+cycleway:left:surface=artificial_turf =asphalt =clay =cobblestone =cobblestone:flattened =compacted =concrete =concrete:lanes =concrete:plates =decoturf =dirt =earth =fine_gravel
+=grass =grass_paver =gravel =gravel_turf =ground =ice =metal =metal_grid =mud =paved =paving_stones =pebblestone =salt =sand =sett =snow =tartan =unpaved =wood =woodchips
+cycleway:right=lane =crossing =no =opposite =opposite_lane =opposite_track =seperate =share_busway =shoulder =sidepath =track
+cycleway:right:smoothness=bad =excellent =good =horrible =impassable =intermediate =very_bad =very_horrible
+cycleway:right:oneway=1 =-1 =alternating =no =reversible =yes
+cycleway:right:segregated=no =yes
+cycleway:right:surface=artificial_turf =asphalt =clay =cobblestone =cobblestone:flattened =compacted =concrete =concrete:lanes =concrete:plates =decoturf =dirt =earth =fine_gravel
+=grass =grass_paver =gravel =gravel_turf =ground =ice =metal =metal_grid =mud =paved =paving_stones =pebblestone =salt =sand =sett =snow =tartan =unpaved =wood =woodchips
+cycleway:surface=artificial_turf =asphalt =clay =cobblestone =cobblestone:flattened =compacted =concrete =concrete:lanes =concrete:plates =decoturf =dirt =earth =fine_gravel
+=grass =grass_paver =gravel =gravel_turf =ground =ice =metal =metal_grid =mud =paved =paving_stones =pebblestone =salt =sand =sett =snow =tartan =unpaved =wood =woodchips
+forestry=private =yes
+handrail=no =yes
+handrail:left=no =yes
+handrail:right=no =yes
+hazmat=designated =no
+hazmat:water=no =permissive =yes
+hgv=agricultural =delivery =designated =destination =no =yes
+horse=designated =no =permissive =private =destination =official =yes
+foot=customers =designated =destination =no =permissive =private =official =use_sidepath =yes
+footway=sidewalk =crossing
+goods=delivery =destination =no =private =yes
+is_sidepath=no =yes
+junction=circular =jughandle
+maxspeed:variable=environment =obstruction =peak_traffic =school_zone =weather =yes
+moped=designated =no =use_sidepath =yes
+motor_vehicle=agricultural =delivery =designated =destination =forestry =no =permissive =private =yes
+motorcar=agricultural =designated =destination =forestry =no =permissive =private =yes
+motorcycle=agricultural =designated =destination =forestry =permissive =private =no =yes
+motorroad=no =yes
+mtb=no =yes
+mtb:scale:imba=0 =1 =2 =3 =4
+mtb:scale:uphill=0 =1 =2 =3 =4 =5
+mtb:type=allmountain =crosscountry =dirtjump =downhill =freeride =northshore =slopestyle =trial
+oneway=1 =-1 =alternating =no =reversible =yes
+oneway:bicycle=1 =-1 =alternating =no =reversible =yes
+overtaking=backward =both =caution =forward =no =yes
+overtaking:forward=caution =no =yes
+overtaking:hgv=backward =both =caution =forward =no =yes
+parking:condition:both=customers =disabled =disc =free =private =residents =ticket
+parking:condition:left=customers =disabled =disc =free =private =residents =ticket
+parking:condition:right=customers =disabled =disc =free =private =residents =ticket
+parking:lane:both=diagonal =fire_lane =marked =no_parking =no_stopping =parallel =perpendicular
+parking:lane:left=diagonal =fire_lane =marked =no_parking =no_stopping =parallel =perpendicular
+parking:lane:left:parallel=lay_by =on_kerb =on_street
+parking:lane:right=diagonal =fire_lane =marked =no_parking =no_stopping =parallel =perpendicular
+parking:lane:right:parallel=lay_by =on_kerb =on_street
+passing_places=no =yes
+piste:difficulty=advanced =easy =expert =extreme =freeride =intermediate =novice
+piste:grooming=backcountry =classic =classic+skating =mogul =scooter =skating 
+piste:type=downhill =hike =ice_skate =nordic =skitour =sled =sleigh =snow_park
+priority_road=designated =end =yes_unposted
+psv=designated =no =yes
+public_transport=platform =station
+ramp=no =yes
+route=bicycle =bus =canal =coach =detour =ferry =fitness_trail =foot =hiking =horse =inline_skates =light_rail =minibus =monorail 
+=ncn =nordic_walking =pipeline =piste =railway =road =running =share_taxi =ski =subway =tracks =train =tram =trolleybus
+sac_scale=alpine_hiking =demanding_alpine_hiking =demanding_mountain_hiking =difficult_alpine_hiking =hiking =mountain_hiking
+segregated=no =yes
+shoulder=both =left =right =no =yes
+sidewalk=both =left =no =none =right =seperate =yes
+sidewalk:both:surface=artificial_turf =asphalt =clay =cobblestone =cobblestone:flattened =compacted =concrete =concrete:lanes =concrete:plates =decoturf =dirt =earth =fine_gravel
+=grass =grass_paver =gravel =gravel_turf =ground =ice =metal =metal_grid =mud =paved =paving_stones =pebblestone =salt =sand =sett =snow =tartan =unpaved =wood =woodchips
+sidewalk:left:surface=artificial_turf =asphalt =clay =cobblestone =cobblestone:flattened =compacted =concrete =concrete:lanes =concrete:plates =decoturf =dirt =earth =fine_gravel
+=grass =grass_paver =gravel =gravel_turf =ground =ice =metal =metal_grid =mud =paved =paving_stones =pebblestone =salt =sand =sett =snow =tartan =unpaved =wood =woodchips
+sidewalk:right:surface=artificial_turf =asphalt =clay =cobblestone =cobblestone:flattened =compacted =concrete =concrete:lanes =concrete:plates =decoturf =dirt =earth =fine_gravel
+=grass =grass_paver =gravel =gravel_turf =ground =ice =metal =metal_grid =mud =paved =paving_stones =pebblestone =salt =sand =sett =snow =tartan =unpaved =wood =woodchips
+ski=designated =no =yes
+smoothness=bad =excellent =good =horrible =impassable =intermediate =very_bad =very_horrible
+surface=artificial_turf =asphalt =clay =cobblestone =cobblestone:flattened =compacted =concrete =concrete:lanes =concrete:plates =decoturf =dirt =earth =fine_gravel
+=grass =grass_paver =gravel =gravel_turf =ground =ice =metal =metal_grid =mud =paved =paving_stones =pebblestone =salt =sand =sett =snow =tartan =unpaved =wood =woodchips
+tracktype=grade1 =grade2 =grade3 =grade4 =grade5
+traffic=heavy =intermediate =low =trunk
+trail_visibility=bad =excellent =good =horrible =intermediate =no
+tunnel=building_passage =culvert =yes
+vehicle=agricultural =delivery =destination =forestry =no =permissive =private =yes
+winter_service=limited =no =yes
+
+--keep-node-tags=all
+distance=
+junction=yes
+VRS:*=
+barrier=block =bollard =border_control =bump_gate =bus_trap =cattle_grid =chain =debris =entrance =full-height_turnstile =gate =hampshire_gate =height_restrictor =horse_stile
+=jersey_barrier =kent_carriage_gap =kerb =kissing_gate =lift_gate =log =motorcycle_barrier =rope =sally_port =spikes =stile =sump_buster =swing_gate =tank_trap =toll_booth =turnstile =yes
+button_operated=no =yes
+crossing:activation=automatic =local =remote =user
+crossing:barrier=double_half =full =half =no =yes
+crossing:bell=no =yes
+crossing:light=no =yes
+crossing:on_demand=no =yes
+crossing:saltire=no =yes
+crossing:supervision=attendant =automatic =camera =no =phone
+cycleway=asl =bikebox
+cycleway:right=asl =bikebox
+cycleway:left=asl =bikebox
+entrance=emergency =exit =home =main =service =staircase =yes
+public_transport=platform =pole =station =stop_position
+railway=crossing =level_crossing
+traffic_signals=blinker =continuous_green =controller =blink_mode =emergency =ramp_meter
+traffic_signals:direction=forward =backward
+
+--out-o5m
