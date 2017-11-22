@@ -262,6 +262,13 @@ public class OpenGL
 		glDeleteShader(fragmentShaderId); // delete fragment shader
 
 		glUniformMatrix4fv(glGetUniformLocation(shaderProgramId, "projection"), false, new Matrix4f().ortho2D(-0.01f, 0.01f, -0.01f, 0.01f).get(new float[16]));
+		
+		glfwSetFramebufferSizeCallback(windowId, (id,w,h)->
+		{
+			glUseProgram(shaderProgramId);
+			glUniformMatrix4fv(glGetUniformLocation(shaderProgramId, "projection"), false, new Matrix4f().ortho2D(-0.01f*((float)w/(float)h), 0.01f*((float)w/(float)h), -0.01f, 0.01f).get(new float[16]));
+			glUseProgram(0);
+		});
 	}
 
 	private void render()
