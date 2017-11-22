@@ -7,6 +7,7 @@ import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -19,7 +20,7 @@ public class HighwayReader implements Iterable<Highway>
 
 	public HighwayReader(String path) throws IOException
 	{
-		this.in = new DataInputStream(new BufferedInputStream(new FileInputStream(path)));
+		this.in = new DataInputStream(new BufferedInputStream(getClass().getClassLoader().getResourceAsStream(path)));
 		this.path = path;
 		readHeader();
 	}

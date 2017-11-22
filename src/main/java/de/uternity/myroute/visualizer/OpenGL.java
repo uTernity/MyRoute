@@ -108,7 +108,7 @@ public class OpenGL
 
 	private void meshSetup() throws IOException
 	{
-		HighwayReader highways = new HighwayReader("D:/Dateien/OSM Daten/final/51;7.utr");
+		HighwayReader highways = new HighwayReader("51;7.utr");
 		Iterator<Highway> iterator = highways.iterator();
 
 		List<Highway> streets = new ArrayList<>();
