@@ -22,6 +22,8 @@ import static org.lwjgl.opengl.GL14.GL_MIRRORED_REPEAT;
 import static org.lwjgl.opengl.GL15.*;
 import static org.lwjgl.opengl.GL20.*;
 import static org.lwjgl.opengl.GL30.*;
+import static org.lwjgl.opengl.GL32.GL_GEOMETRY_SHADER;
+import static org.lwjgl.opengl.GL32.GL_LINES_ADJACENCY;
 import static org.lwjgl.system.MemoryUtil.NULL;
 
 public class OpenGL
@@ -29,9 +31,9 @@ public class OpenGL
 	private boolean polygonMode;
 	private int shaderProgramId, vaoId;
 	private long windowId;
-	private int primitivesCount, indicesCount;
+	private int indicesCount;
 
-	float xx = 0, yy = 0, speed = 0.01f;
+	float xx = 0, yy = 0, speed = 0.01f, scale = 1;
 
 	List<Float> vals = new ArrayList<>();
 
@@ -122,53 +124,46 @@ public class OpenGL
 
 
 		List<Integer> indicesVals = new ArrayList<>();
-
-		int i = 0, count = 0;
-
-		for (Highway highway : streets)
+		int maxIndices = streets.stream().mapToInt((h)->h.getWayNodes().size()).sum();
+		int k = 0;
+		for(Highway highway : streets)
 		{
-			//if (++count < 20)
-			//{
-				for (int j = 0; j < highway.getWayNodes().size(); j++)
-				{
-					//System.out.println((float) highway.getWayNodes().get(j).getLat() + "  " + (float) highway.getWayNodes().get(j).getLon());
-					vals.add((float) highway.getWayNodes().get(j).getLon());
-					vals.add((float) highway.getWayNodes().get(j).getLat());
+			for(int j = 0; j < highway.getWayNodes().size(); j++)
+			{
+				vals.add((float)highway.getWayNodes().get(j).getLon());
+				vals.add((float)highway.getWayNodes().get(j).getLat());
+				vals.add(0.0f);
+				if(new String(highway.getTags(),"ISO-8859-1").matches("(.*highway=footway.*)|(.*highway=path.*)|(.*highway=pedestrian.*)"))
 					vals.add(0.0f);
-
-					if (j != highway.getWayNodes().size() - 1)
-					{
-						indicesVals.add(i++);
-						indicesVals.add(i);
-					}
+				else if(new String(highway.getTags(),"ISO-8859-1").matches("(.*highway=motorway.*)|(.*highway=trunk.*)|(.*highway=primary.*)"))
+					vals.add(2.0f);
+				else
+					vals.add(1.0f);
+				
+				if(j != highway.getWayNodes().size()-1)
+				{
+					indicesVals.add(Math.max(0, k-1));
+					indicesVals.add(k);
+					indicesVals.add(Math.min(maxIndices-1, k+1));
+					indicesVals.add(Math.min(maxIndices-1, k+2));
+					k++;
 				}
-
-				i++;
-
-				//System.out.println(indicesVals.toString());
-			//}
-
+			}
+			k++;
 		}
 
 		xx = -vals.get(0);
 		yy = -vals.get(1);
-
 		xx = -7.567f;
 		yy = -51.0f;
 
 		float[] v = new float[vals.size()];
-
-		for (i = 0; i < vals.size(); i++)
+		for(int i = 0; i < vals.size(); i++)
 			v[i] = vals.get(i);
 
 		int[] indices = new int[indicesVals.size()];
-
-		for (i = 0; i < indicesVals.size(); i++)
+		for(int i = 0; i < indicesVals.size(); i++)
 			indices[i] = indicesVals.get(i);
-
-		primitivesCount = vals.size();
-
-
 		indicesCount = indicesVals.size();
 
 		int vboId = glGenBuffers(); // create VBO (vertex buffer object) to send multiple vertex data to the graphics card at once
@@ -182,8 +177,10 @@ public class OpenGL
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, eboId); // bind element array buffer to EBO
 		glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices, GL_STATIC_DRAW); // copy data to buffer
 
-		glVertexAttribPointer(0, 3, GL_FLOAT, false, 3 * Float.BYTES, 0); // tell OpenGL how to interpret vertex data
+		glVertexAttribPointer(0, 3, GL_FLOAT, false, 4 * Float.BYTES, 0 * Float.BYTES); // tell OpenGL how to interpret vertex data
 		glEnableVertexAttribArray(0); // enable vertex attributes
+		glVertexAttribPointer(1, 1, GL_FLOAT, false, 4 * Float.BYTES, 3 * Float.BYTES); // tell OpenGL how to interpret vertex data
+		glEnableVertexAttribArray(1); // enable vertex attributes
 	}
 
 	private void textureSetup()
@@ -224,6 +221,17 @@ public class OpenGL
 			System.err.println(glGetShaderInfoLog(vertexShaderId));
 			System.exit(-1);
 		}
+		
+		int geometryShaderId = glCreateShader(GL_GEOMETRY_SHADER);
+		glShaderSource(geometryShaderId, getShaderCode("shader/geometryShader.glsl"));
+		glCompileShader(geometryShaderId);
+		
+		if (glGetShaderi(geometryShaderId, GL_COMPILE_STATUS) == 0)
+		{
+			System.err.println("Geometry shader compilation failed:\n");
+			System.err.println(glGetShaderInfoLog(geometryShaderId));
+			System.exit(-1);
+		}
 
 		int fragmentShaderId = glCreateShader(GL_FRAGMENT_SHADER);
 		glShaderSource(fragmentShaderId, getShaderCode("shader/fragmentShader.glsl"));
@@ -238,6 +246,7 @@ public class OpenGL
 
 		shaderProgramId = glCreateProgram(); // create shader program
 		glAttachShader(shaderProgramId, vertexShaderId); // link vertex shader to shader program
+		glAttachShader(shaderProgramId, geometryShaderId); // link shader to shader program
 		glAttachShader(shaderProgramId, fragmentShaderId); // link fragment shader to shader program
 		glLinkProgram(shaderProgramId); // link shader
 
@@ -259,6 +268,7 @@ public class OpenGL
 
 		glUseProgram(shaderProgramId); // use shader program
 		glDeleteShader(vertexShaderId); // delete vertex shader
+		glDeleteShader(geometryShaderId);
 		glDeleteShader(fragmentShaderId); // delete fragment shader
 
 		glUniformMatrix4fv(glGetUniformLocation(shaderProgramId, "projection"), false, new Matrix4f().ortho2D(-0.01f, 0.01f, -0.01f, 0.01f).get(new float[16]));
@@ -285,13 +295,17 @@ public class OpenGL
 			xx+=time*speed;
 		if(glfwGetKey(windowId,GLFW_KEY_RIGHT) == GLFW_PRESS)
 			xx-=time*speed;
+		if(glfwGetKey(windowId,GLFW_KEY_1) == GLFW_PRESS)
+			scale+=time*speed*100;
+		if(glfwGetKey(windowId,GLFW_KEY_2) == GLFW_PRESS)
+			scale-=time*speed*100;
 
 		glUseProgram(shaderProgramId);
-		glUniformMatrix4fv(glGetUniformLocation(shaderProgramId, "view"), false, new Matrix4f().translation(xx, yy,0).get(new float[16]));
+		glUniformMatrix4fv(glGetUniformLocation(shaderProgramId, "view"), false, new Matrix4f().scaling(scale).translate(xx, yy,0).get(new float[16]));
 		glUniform4f(vertexColorLocation, 1.0f, 1.0f,1.0f, 1.0f);
 		//glBindTexture(GL_TEXTURE_2D, textureId);
 		glBindVertexArray(vaoId);
-		glDrawElements(GL_LINES, indicesCount, GL_UNSIGNED_INT, 0);
+		glDrawElements(GL_LINES_ADJACENCY, indicesCount, GL_UNSIGNED_INT, 0);
 		glBindVertexArray(0);
 		glUseProgram(0);
 	}
